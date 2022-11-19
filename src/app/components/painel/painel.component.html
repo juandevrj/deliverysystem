@@ -1,0 +1,184 @@
+
+<div class="ui middle aligned center aligned grid" style="max-width: 400px;margin-left: auto;margin-right: auto;" *ngIf="Auth == false">
+    <div class="column">
+      <h2 class="ui teal image header">
+        <div class="content">
+          Painel do Administrador
+        </div>
+      </h2>
+      <form class="ui large form" [formGroup]="formCliente">
+        <div class="ui stacked segment">
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="user icon"></i>
+              <input type="text" formControlName="username" name="username" placeholder="Usuário" (change)="rmvErro()">
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input type="password" formControlName="password" name="password" placeholder="Senha" (change)="rmvErro()">
+            </div>
+          </div>
+          <input type="button" class="ui fluid large teal submit button" value="Login" (click)="onSubmit()">
+        </div>
+  
+        <div id="erromsg" class="ui error message"></div>
+      </form>
+    </div>
+  </div>
+  
+  <div class="sairBtn" *ngIf="Auth == true">
+  <div id="poweronBtn"  class="poweroff-btn" [ngClass]="classStatus" (click)="showModal(18112022)"><i class="power off icon"></i><br>{{OnOff}}</div>
+  <div class="signout-btn" (click)="callLogout()"><i class="sign out alternate icon"></i><br>SAIR</div>
+ 
+  <div class="ui tiny modal " id='18112022'>
+    <i class="close icon"></i>
+    <div class="header blackstl">
+      <div class="ui toggle checkbox">
+        <input type="checkbox" name="servicestatus" id="servicestatus" (click)="changeStatus()">
+        <label><strong [ngClass]="classStatus">({{OnOff}})</strong></label>
+      </div>
+    </div>
+    
+    <div class="content listapainel"> 
+
+      <div class="ui form">
+        <div class="field">
+          <label>Mensagem a ser exibida na página inicial</label>
+          <textarea id="txtdescricao" maxlength="400">{{statusServico[1]}}</textarea>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+  
+  <div class="ui middle aligned center aligned grid" *ngIf="Auth == true">
+    <div class="column">
+      <h2 class="ui teal image header">
+        <div class="content">
+          Lista de Pedidos
+        </div>
+      </h2>
+
+      
+      <div class="table-lista-pedidos" *ngIf="this.PedidosLista != undefined">
+        <table class="ui selectable sortable unstackable celled table">
+            <thead>
+              <tr>
+                <th class="sorted ascending">Id</th>
+                <th>Pedido</th>
+                <th>Status</th>
+                <th>Data/Hora</th>
+              </tr>
+            </thead>
+            <tbody>
+                 
+            <tr *ngFor="let repo of PedidosLista; let i = index" [ngClass]="getclassinfo(repo.status)" (click)="showModal(i)">
+                <td>#{{repo.id}}</td>
+                <td>{{repo.titulo}}</td>
+                <td>{{repo.status}}</td>
+                <td>{{repo.data_pedido_criado}}</td>
+
+                <div class="ui tiny modal" id='{{i}}'>
+                    <i class="close icon"></i>
+                    <div class="header">
+                        Pedido: #{{repo.id}} |  {{repo.status}}
+                    </div>
+                       
+
+                    <div *ngFor="let pedidosResp of Pedido;">
+                    <div *ngIf="repo.id == pedidosResp.id">
+                    <div class="content listapainel">
+       
+                        
+                            <div class="produtoLista"><hr>
+                            <strong><i class="caret square right icon"></i>{{pedidosResp.titulo}}</strong><br/>
+                            <strong><i class="angle right icon" *ngIf="pedidosResp.pizza1"></i>{{pedidosResp.pizza1}}</strong>
+                            <div *ngIf="pedidosResp.qntsabores1 != 0"><i class="angle right icon" ></i>{{pedidosResp.qntsabores1}} {{saborOUsabores(pedidosResp.qntsabores1)}}</div>
+                            <div *ngIf="pedidosResp.sabor1"><i class="angle right icon"></i>{{pedidosResp.sabor1}}</div>
+                            <div *ngIf="pedidosResp.bordaid1"><i class="angle right icon"></i>{{pedidosResp.bordaid1}}</div>
+                            <div *ngIf="pedidosResp.pizza2">
+                                <strong><i class="angle right icon"></i>{{pedidosResp.pizza2}}</strong><br>
+                                <i class="angle right icon"></i>{{pedidosResp.qntsabores2}} {{saborOUsabores(pedidosResp.qntsabores2)}}<br/>
+                                <i class="angle right icon"></i>{{pedidosResp.sabor2}}<br/>
+                                <i class="angle right icon"></i>{{pedidosResp.bordaid2}}<br/>
+                            </div>
+                            <div *ngIf="pedidosResp.bebidaid"><strong><i class="angle right icon"></i>{{pedidosResp.bebidaid}}</strong></div>
+                            <strong>{{pedidosResp.valor  | currency : 'BRL'}}</strong>
+                            </div>
+                 
+
+
+             
+                      </div>
+                    </div>
+                </div> 
+
+                <div *ngFor="let clienteResp of clientedados;">
+                    <div class="box1 produtoLista listapainel" *ngIf="clienteResp.token == repo.token">
+                        <div><strong>{{clienteResp.nome}} {{clienteResp.sobrenome}}</strong></div>
+                        <div>{{clienteResp.bairro}}, Itaguaí-RJ</div>
+                        <div>{{clienteResp.rua}}, {{clienteResp.numero}}</div>
+                        <div *ngIf="clienteResp.complemento">Complemento: {{clienteResp.complemento}}</div>
+                        <div>Referência: {{clienteResp.referencia}}</div>
+                        <div>Forma pagamento: {{clienteResp.pagamento}}</div>
+                        <div *ngIf="clienteResp.observacao">Obs.: {{clienteResp.observacao}}</div>
+                        <div>{{clienteResp.celular}}</div>
+                      
+                    </div>
+                  </div>
+                  <div class="painel_valor">
+
+
+
+                 <table>
+                    <tr>
+                    <td>Sub-Total&nbsp;&nbsp;</td>
+                    <td>{{subtotal(repo.id)  | currency : 'BRL'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Entrega</td>
+                        <td>{{5  | currency : 'BRL'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td>{{subtotal(repo.id) + 5  | currency : 'BRL'}}</td>
+                    </tr>
+                </table>
+                  </div>
+
+                    <div class="actions">
+                      <select class="ui dropdown" name="{{repo.id}}" id="{{repo.id}}">
+                        <option value="Pedido em Preparação">Pedido em Preparação</option>
+                        <option value="Saiu para Entrega">Saiu para Entrega</option>
+                        <option value="Pedido Entregue">Pedido Entregue</option>
+                        <option value="Pedido Cancelado">Pedido Cancelado</option>
+                      </select>
+                      <div class="ui green button" (click)="getSelId(repo.id, i)">OK</div>
+                    </div>
+                  </div>
+
+            </tr>
+
+            </tbody>
+        </table>
+
+
+
+
+
+
+      </div>
+
+     <h1 *ngIf="PedidosLista == undefined">{{pedidosempty()}}</h1>
+
+    </div>
+  </div>
+
+
+
+

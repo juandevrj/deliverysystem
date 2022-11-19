@@ -1,0 +1,108 @@
+<div class="backbtn ui">
+    <h3 class="ui left" onclick="history.go(-1)">
+      <i class="arrow left icon" ></i>
+    </h3>
+  </div>
+
+  <div class="centerb ui relaxed divided list">
+    <div >
+        <div class='ui table'>
+
+            <div class="box1">
+                <h2 class="cashout-title">Confirmar Pedido</h2>
+
+
+                <div class="cashout-produto" *ngFor="let prodPromo of get_carrinhoPromo;">
+                  <div class="cashout-produto-title"><i class="caret square right icon"></i>{{prodPromo.prodID}}</div>
+                  <div class="cashout-produto-content">
+                    <p>
+                    <strong>{{prodPromo.Pizza1}}</strong><br/>
+                    - {{prodPromo.qntSabores1}} {{saborOUsabores(prodPromo.qntSabores1)}}<br/>
+                    - {{prodPromo.Sabor1}}<br/>
+                    - {{prodPromo.bordaID1}}
+                    </p>
+                    <p *ngIf="prodPromo.Pizza2 > ''">
+                    <strong>{{prodPromo.Pizza2}}</strong><br/> 
+                    - {{prodPromo.qntSabores2}} {{saborOUsabores(prodPromo.qntSabores2)}}<br/>
+                    - {{prodPromo.Sabor2}}<br/>
+                    - {{prodPromo.bordaID2}}   
+                    </p>
+                    <p *ngIf="prodPromo.BebidaID > 0">
+                    <strong>Bebida</strong><br/> 
+                    - {{prodPromo.bordaID2}}
+                    </p>
+                    <div class="cashout-produto-total">
+                    <div><strong>Valor R$</strong> <div class="cashout-produto-valor">{{prodPromo.Valor | currency : 'BRL'}}</div></div>
+                    </div>
+
+
+                  <div class="cashout-produto-separador"></div>
+                </div>
+                </div>
+
+
+                <div class="cashout-produto" *ngFor="let prod of get_carrinho;">
+                  <div class="cashout-produto-title"><i class="caret square right icon"></i>{{prod.prodID}}</div>
+                  <div class="cashout-produto-content">
+                    <div class="cashout-produto-total">
+                    <div><strong>Valor R$</strong> <div class="cashout-produto-valor">{{prod.Valor | currency : 'BRL'}}</div></div>
+                    </div>
+
+                    <div class="cashout-produto-separador"></div>
+                </div>
+                </div>
+
+
+
+
+
+
+
+                   
+                    <div class="cashout-produto-total" *ngIf="get_carrinhoPromo.length > 0">
+                      <div><strong>Sub-total R$</strong> <div class="cashout-produto-valor">{{subtotal1() | currency : 'BRL'}}</div></div>
+                      <div><strong>Entrega R$</strong> <div class="cashout-produto-valor">5,00</div></div>
+                      <div><strong>Total R$</strong> <div class="cashout-produto-valor">{{subtotal2(5) | currency : 'BRL'}}</div></div>
+                    </div>
+                  
+                   
+                </div>
+                </div>
+
+
+                <div class="box1" style="margin-top:20px;background-color: rgb(223, 223, 223);" *ngIf="get_dadosEntrega.nome > ''">
+                  <h3 class="cashout-title">Entrega</h3>
+                  <div class="cashout-produto">
+                      <div class="cashout-produto-content">
+                      <p>
+                      <strong>{{get_dadosEntrega.nome}} {{get_dadosEntrega.sobrenome}}</strong><br/>
+                      {{get_dadosEntrega.endereco}}, {{get_dadosEntrega.endereco2}}<br/>
+                      {{get_dadosEntrega.bairro}}, Itaguaí-RJ<br/>
+                      {{get_dadosEntrega.complemento}}<br/>
+                      {{get_dadosEntrega.referencia}}
+                      </p>
+                      <p>
+                        <strong>Contato</strong><br/>
+                        {{get_dadosEntrega.celular}}<br/>
+                      </p>
+                      <p>
+                        <strong>Forma de Pagamento</strong><br/>
+                        {{get_dadosEntrega.pagamento}}<br/>
+                      </p>
+                      <p>
+                        <strong>Observações</strong><br/>
+                        {{observacao(get_dadosEntrega.observacao)}}<br/>
+                      </p>
+                     
+                    
+                     
+                    </div>
+                  </div>
+               </div>
+
+      <input type="submit" style="margin-top:15px" class="fluid ui green button" value="Enviar Pedido" (click)="enviaPedido();">
+
+
+
+        </div>
+    </div>

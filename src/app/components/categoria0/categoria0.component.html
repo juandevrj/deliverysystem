@@ -1,0 +1,104 @@
+<div class="backbtn ui">
+    <h3 class="ui left" onclick="history.go(-1)">
+      <i class="arrow left icon" ></i>
+    </h3>
+  </div>
+
+  <div class="centerb ui relaxed divided list">
+    <div *ngIf="postData_selected[1] != 0" class="nameprod1">
+      MONTE SUA {{postData_selected[1]}}
+
+      <h4 class="ui block header" *ngIf="postData_selected[3] != 1;">
+
+            <div class="box1">
+              <label>Selecione</label>
+        
+              <select class="ui fluid dropdown" id="sabor-select" (change)="callListaSabores()">
+                <option class="default text" value="">Quantidade de Sabores</option>
+                <option class="default text" *ngFor="let in of counter(postData_selected[3]) ;let i = index" value="{{i + 1}}">{{i + 1 }} {{saborOUsabores(i + 1)}}</option>
+              </select>
+           
+            <div class="separ1">
+              <br/>
+              <label>Seleção de Sabores</label>
+        
+              <select class="ui fluid dropdown multiple" id="sabor-select2" (change)="callBorda()">
+                <option class="default text" value="">Sabores</option>
+                <option class="default text" *ngFor="let sabordatas of saboresData ;let i = index" value="{{sabordatas[1]}}">{{sabordatas[1]}} <p class="description-sabor">{{sabordatas[2]}}</p></option>
+              </select>
+            </div>
+            
+            <div class="separ2">
+              <br/>
+              <label>Selecione a Borda</label>
+        
+              <select class="ui fluid dropdown" id="borda-select" (change)="showPizza2()">
+                <option class="default text" value="">Bordas</option>
+                <option class="default text" *ngFor="let bordasDatas of bordasData ;let i = index" value="{{bordasDatas[1]}}">{{bordasDatas[1]}}</option>
+              </select>
+            </div>
+            </div>
+      </h4>
+    <div *ngIf="secPizza != 0" class="nameprod2">
+      Monte sua {{postData_selected[5]}}
+      <h4 class="ui block header">
+      <div class="box1">
+        <label>Selecione</label>
+  
+        <select class="ui fluid dropdown" id="sabor-select3" (change)="callListaSabores2()">
+          <option class="default text" value="">Quantidade de Sabores</option>
+          <option class="default text" *ngFor="let in of counter(postData_selected[6]) ;let i = index" value="{{i + 1 }}">{{i + 1 }} {{saborOUsabores(i + 1)}}</option>
+        </select>
+
+        <div class="separ3">
+          <br/>
+          <label>Seleção de Sabores</label>
+    
+          <select class="ui fluid dropdown multiple" id="sabor-select4" (change)="callBorda2()">
+            <option class="default text" value="">Sabores</option>
+            <option class="default text" *ngFor="let sabordatas of saboresData ;let i = index" value="{{sabordatas[1]}}">{{sabordatas[1]}}</option>
+          </select>
+        </div>
+
+        <div class="separ4">
+          <br/>
+          <label>Selecione a Borda</label>
+    
+          <select class="ui fluid dropdown" id="borda-select2" (change)="callBebidas()">
+            <option class="default text" value="">Bordas</option>
+            <option class="default text" *ngFor="let bordasDatas of bordasData ;let i = index" value="{{bordasDatas[1]}}">{{bordasDatas[1]}}</option>
+          </select>
+        </div>
+      </div>
+     </h4>
+    </div>
+
+   <div *ngIf="bebidas != 0" class="nameprod2">
+    <br/>
+    Escolha a bebida
+    <h4 class="ui block header">
+      <div class="box1">
+        <label>Selecione</label>
+        <select class="ui fluid dropdown" id="bebida-select" (change)="finalizaProduto()">
+          <option class="default text" value="">Selecione a Bebida</option>
+          <option class="default text" *ngFor="let bebidasDatas of bebidasData ;let i = index" value="{{bebidasDatas[1]}}">{{bebidasDatas[1]}}</option>
+        </select>
+      </div>
+    </h4>
+
+    </div>
+  </div>
+
+  {{msgError}}
+  <br/>
+     <div class="disbtn">
+       <input type="button" class="ui fluid green button" value="CONTINUAR" (click)="continuar();">
+     </div>
+     
+    <div  class="item">
+      <div class="middle aligned content">
+        <a class="header"></a>
+        <div class="color1 description" id="color1"></div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="backbtn ui">
+    <h3 class="ui left" onclick="history.go(-1)">
+      <i class="arrow left icon" ></i>
+    </h3>
+  </div>
+<div class="centerb ui relaxed divided list">
+    <div >
+
+        <div class="pedidos-title" *ngIf="pedidosLista != undefined">MEUS PEDIDOS</div>
+
+        <div class='ui table'>
+            <div *ngIf="num == false" class="box1" >
+             <br/><br/>
+             <p class="title_carrinho" style="text-align: center;" ><i class="thumbs down icon"></i> Sem Pedidos</p>
+             <br/>
+             <input class="fluid ui red button" value="Voltar" routerLink="/cardapio">
+            </div>
+
+    
+            <div class="box1" *ngFor="let repo of pedidosLista; let i = index">
+                
+
+                <div class="ui styled fluid accordion" id="accordion">
+                    <div class="title" [ngClass]="i == 0 ? 'active' : ''" (click)="setSelect(i)"> 
+                      <i class="dropdown icon"></i>
+                      #{{repo.id}} <label>{{repo.data_pedido_criado}}</label> <div class="pedido-status" [ngClass]="i == 0 ? 'ativo' : ''">{{repo.status}}</div>
+                    </div>
+                    <div class="content" [ngClass]="i == 0 ? 'active' : ''">
+                    <div class="box1 produtoLista" style="padding-bottom: 5px;">
+                    <div *ngIf="repo.data_pedido_entregue">Pedido Entregue:  {{repo.data_pedido_entregue}}</div>
+                    <div *ngIf="repo.data_pedido_pronto">Saiu para Entrega:  {{repo.data_pedido_pronto}}</div>
+                    <div *ngIf="repo.data_pedido_aceito">Pedido em Preparação:  {{repo.data_pedido_aceito}}</div>
+                    <div *ngIf="repo.data_pedido_criado">Aguardando Aprovação:  {{repo.data_pedido_criado}}</div>
+                    </div>
+                    <div *ngFor="let pedidosResp of pedidos;">
+                    
+              
+                    <div *ngIf="repo.id == pedidosResp.id">
+                    <div class="produtoLista"><hr>
+                    <strong><i class="caret square right icon"></i>{{pedidosResp.titulo}}</strong><br/>
+                    <strong><i class="angle right icon" *ngIf="pedidosResp.pizza1"></i>{{pedidosResp.pizza1}}</strong>
+                    <div *ngIf="pedidosResp.qntsabores1 != 0"><i class="angle right icon" ></i>{{pedidosResp.qntsabores1}} {{saborOUsabores(pedidosResp.qntsabores1)}}</div>
+                    <div *ngIf="pedidosResp.sabor1"><i class="angle right icon"></i>{{pedidosResp.sabor1}}</div>
+                    <div *ngIf="pedidosResp.bordaid1"><i class="angle right icon"></i>{{pedidosResp.bordaid1}}</div>
+                    <div *ngIf="pedidosResp.pizza2">
+                        <strong><i class="angle right icon"></i>{{pedidosResp.pizza2}}</strong><br>
+                        <i class="angle right icon"></i>{{pedidosResp.qntsabores2}} {{saborOUsabores(pedidosResp.qntsabores2)}}<br/>
+                        <i class="angle right icon"></i>{{pedidosResp.sabor2}}<br/>
+                        <i class="angle right icon"></i>{{pedidosResp.bordaid2}}<br/>
+                    </div>
+                    <div *ngIf="pedidosResp.bebidaid"><strong><i class="angle right icon"></i>{{pedidosResp.bebidaid}}</strong></div>
+                    <strong>{{pedidosResp.valor  | currency : 'BRL'}}</strong>
+                     
+
+
+
+                    
+                    </div>
+                    <br/>
+                    </div>
+
+                    
+                    </div>
+
+
+                    <div class="box1 produtoLista" *ngIf="clientedados != undefined">
+                        <div><strong>{{clientedados.nome}} {{clientedados.sobrenome}}</strong></div>
+                        <div>{{clientedados.bairro}}, Itaguaí-RJ</div>
+                        <div>{{clientedados.rua}}, {{clientedados.numero}}</div>
+                        <div *ngIf="clientedados.complemento">Complemento: {{clientedados.complemento}}</div>
+                        <div>Referência: {{clientedados.referencia}}</div>
+                        <div>Forma pagamento: {{clientedados.pagamento}}</div>
+                        <div *ngIf="clientedados.observacao">Obs.: {{clientedados.observacao}}</div>
+                        <div>{{clientedados.celular}}</div>
+                      
+                    </div>
+
+              </div>
+              </div>
+
+
+
+          </div>
+
+
+
+
+        </div>
+    </div>
+</div>

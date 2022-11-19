@@ -1,0 +1,109 @@
+<?php
+
+  // não deixe quebra de linha nos headers abaixo
+ require ('include/config.inc.php');
+ 
+  // não deixe quebra de linha nos headers abaixo
+  header('Access-Control-Allow-Origin: *');
+  header('Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS');
+  header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
+  header("Content-Type: application/json; charset=utf-8");
+ 
+  // vamos obter os dados vindo do formulário
+  // atenção: em um código real temos que validar
+  $dados = file_get_contents("php://input");
+   
+  // a requisição foi post?
+  if(isset($dados) && !empty($dados)){
+	switch($dados) {
+		case 'promocao':
+		
+$query = "SELECT * FROM promocao";
+$result = mysqli_query($con, $query);	
+$i=0;
+
+if ($result->num_rows > 0)
+{
+while($row = $result->fetch_assoc()) 
+{
+$pedidos[$i] = array(intval($row["id"]),$row["titulo"],intval($row["valor"]));
+
+$i++;
+}
+echo json_encode($pedidos);
+}
+break;
+		
+		case 'pizzas':
+$query = "SELECT * FROM pizzas";
+$result = mysqli_query($con, $query);	
+$i=0;
+
+if ($result->num_rows > 0)
+{
+while($row = $result->fetch_assoc()) 
+{
+$pedidos[$i] = array(intval($row["id"]),$row["titulo"],intval($row["valor"]));
+
+$i++;
+}
+echo json_encode($pedidos);
+}
+break;
+		
+		case 'petiscos':
+$query = "SELECT * FROM petiscos";
+$result = mysqli_query($con, $query);	
+$i=0;
+
+if ($result->num_rows > 0)
+{
+while($row = $result->fetch_assoc()) 
+{
+$pedidos[$i] = array(intval($row["id"]),$row["titulo"],intval($row["valor"]));
+
+$i++;
+}
+echo json_encode($pedidos);
+}
+break;
+		
+		case 'sobremesas':
+$query = "SELECT * FROM sobremesas";
+$result = mysqli_query($con, $query);	
+$i=0;
+
+if ($result->num_rows > 0)
+{
+while($row = $result->fetch_assoc()) 
+{
+$pedidos[$i] = array(intval($row["id"]),$row["titulo"],intval($row["valor"]));
+
+$i++;
+}
+echo json_encode($pedidos);
+}
+break;
+		
+		case 'bebidas':
+$query = "SELECT * FROM bebidas";
+$result = mysqli_query($con, $query);	
+$i=0;
+
+if ($result->num_rows > 0)
+{
+while($row = $result->fetch_assoc()) 
+{
+$pedidos[$i] = array(intval($row["id"]),$row["titulo"],intval($row["valor"]));
+
+$i++;
+}
+echo json_encode($pedidos);
+}
+break;
+		
+		
+	}
+	}
+?>
+

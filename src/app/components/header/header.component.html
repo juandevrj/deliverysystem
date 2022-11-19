@@ -1,0 +1,9 @@
+<h2 class="ui header">
+    <img src="../../../assets/images/9634412167745blob.webp" routerLink="/cardapio" class="ui circular image">
+    <span routerLink="/cardapio">Pizzaria DeuFome</span>
+
+    <div class="cart1">
+      <div *ngIf="i === true" routerLink="/pedidos" class="cursorst"><i class="large bars icon"></i></div>
+    <div *ngIf="i === true" routerLink="/carrinho"><div class="tagnumber">{{carrinhoLength()}}</div><i class="large shopping cart icon"></i></div>
+    </div>
+  </h2>

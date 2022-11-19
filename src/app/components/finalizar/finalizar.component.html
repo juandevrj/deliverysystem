@@ -1,0 +1,114 @@
+<div class="backbtn ui">
+    <h3 class="ui left" onclick="history.go(-1)">
+      <i class="arrow left icon" ></i>
+    </h3>
+  </div>
+
+  <div class="centerb ui relaxed divided list">
+    <div >
+        <div class='ui table' style="padding: 15px 15px 15px 15px">
+        
+            <form class="ui form" [formGroup]="formCliente" (ngSubmit)="onSubmit()">
+                <h4 class="ui dividing header">Informações Pessoais</h4>
+                <div class="field">
+                  <label>Nome</label>
+                  <div class="two fields">
+                    <div class="field">
+                      <input type="text" name="nome" id="nome" formControlName="nome" placeholder="Nome">
+                    </div>
+                    <div class="field">
+                      <input type="text" name="sobrenome" id="sobrenome" formControlName="sobrenome" placeholder="Sobrenome">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="field">
+                    <label>Celular (com DDD)</label>
+                      <div class="field">
+                        <input type="text" name="celular" name="celular" formControlName="celular" placeholder="(xx) xxxxxxxxx">
+                    </div>
+                  </div>
+
+
+                <h4 class="ui dividing header">Dados Entrega</h4>
+                <div class="two fields">
+                  <div class="fifteen wide field">
+                    <label>Cidade</label>
+                    <select class="ui fluid dropdown" id="city">
+                      <option value="" selected>Itaguaí</option>
+                    </select>
+                  </div>
+                  <div class="four wide field">
+                    <label>Estado</label>
+                    <div class="ui fluid selection dropdown">
+                      <input type="hidden" name="state" id="state">
+                      <i class="dropdown icon"></i>
+                      <div class=" text">RJ</div>
+                      <div class="menu">
+                  <div class="item" data-value="rj">RJ</div>
+                      </div>
+                     </div>
+                  </div>
+                </div>
+                
+                <div class="field">
+                    <label>Bairro</label>
+                      <div class="field">
+                        <select class="ui fluid dropdown" name="bairro" id="bairro" formControlName="bairro">
+                          <option value="">Selecione o bairro</option>
+                          <option value="Centro">Centro (R$5,00 Taxa)</option>
+                          <option value="Engenho">Engenho (R$5,00 Taxa)</option>
+                          <option value="Jardim América">Jardim América (R$5,00 Taxa)</option>
+                          <option value="Amendoeira">Amendoeira (R$5,00 Taxa)</option>
+                        </select>
+                      </div>
+                </div>
+ 
+                <div class="field">
+                    <label>Endereço</label>
+                    <div class="fields">
+                      <div class="twelve wide field">
+                        <input type="text" name="endereco" id="endereco" placeholder="Rua" formControlName="endereco">
+                      </div>
+                      <div class="four wide field">
+                        <input type="text" name="endereco2" id="endereco2" placeholder="Número" formControlName="endereco2">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="two fields">
+                    <div class="field">
+                      <label>Complemento</label>
+                      <input name="complemento" id="complemento"  type="text" placeholder="Complemento" formControlName="complemento">
+                    </div>
+                    <div class="field">
+                      <label>Ponto de referência</label>
+                      <input name="referencia" id="referencia" type="text" placeholder="Referência" formControlName="referencia">
+                    </div>
+                  </div>
+
+                  <div class="field">
+                    <label>Forma Pagamento</label>
+                      <div class="field">
+                        <select class="ui fluid dropdown" name="pagamento" id="pagamento" formControlName="pagamento">
+                          <option value="">Forma de Pagamento</option>
+                          <option value="Dinheiro">Dinheiro</option>
+                          <option value="Cartão de Crédito/Débito">Cartão de Crédito/Débito</option>
+                          <option value="Pix">Pix</option>
+                        </select>
+                      </div>
+                </div>
+
+                <div class="field">
+                    <label>Observações</label>
+                    <textarea rows="2" name="observacao" id="observacao" formControlName="observacao"></textarea>
+                  </div>  
+                <input type="hidden" id="status" name="status" value="0">
+                <input type="submit" class="fluid ui green button" value="Continuar">
+                <div class="ui error message"></div>
+              </form>
+
+
+        </div>
+    </div>
+</div>

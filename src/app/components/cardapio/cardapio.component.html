@@ -1,0 +1,34 @@
+<h1 id="status-servico" class="funcionamento-title" *ngIf="funcionamento == false"><i class="exclamation triangle icon"></i><br/>{{this.status[1]}}</h1>
+<div id="status-servico2" *ngIf="funcionamento == true">
+<div class="ui centered grid container">
+<div>
+  <div>
+    <div class="imgcaption">
+      <a (click)="setCategoria('promocao')" routerLink="/categoria"><img class="ui rounded image" src="../../../assets/images/1639603502555blob.webp"/></a>
+      <p>PROMOÇÃO</p>
+   </div>
+  <div class="imgcaption">
+    <a (click)="setCategoria('pizzas')" routerLink="/categoria"><img class="ui rounded image" src="../../../assets/images/1603914708011blob.webp"></a>
+    <p>PIZZAS</p>
+ </div>
+</div>
+
+<div>
+  <div class="imgcaption">
+    <a (click)="setCategoria('petiscos')" routerLink="/categoria"><img class="ui rounded image" src="../../../assets/images/1604414083485blob.webp"></a>
+    <p>PETISCOS</p>
+ </div>
+ <div class="imgcaption">
+  <a (click)="setCategoria('sobremesas')" routerLink="/categoria"><img class="ui rounded image" src="../../../assets/images/1604414144745blob.webp"></a>
+  <p>SOBREMESAS</p>
+</div>
+
+<div>
+  <div class="imgcaption">
+    <a (click)="setCategoria('bebidas')" routerLink="/categoria"><img class="ui rounded image" src="../../../assets/images/1604414193950blob.webp"></a>
+    <p>BEBIDAS</p>
+    </div>
+    <div>
+    </div>
+</div>
+</div>

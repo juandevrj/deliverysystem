@@ -1,0 +1,15 @@
+<div class="backbtn ui" onclick="history.go(-1)">
+  <h3 class="ui left">
+    <i class="arrow left icon"></i>
+  </h3>
+</div>
+
+
+    <div class="centerb ui relaxed divided list">
+      <div *ngFor="let item of postData" class="item">
+        <div class="middle aligned content " (click)="escolhe_prod(item[0],item[1])">
+          <a class="header">{{item[1]}}</a>
+          <div class="color1 description" id="color1">{{item[2] | currency : 'BRL'}}</div>
+        </div>
+      </div>
+  </div>

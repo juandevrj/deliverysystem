@@ -1,0 +1,80 @@
+<div class="backbtn ui">
+  <h3 class="ui left" onclick="history.go(-1)">
+    <i class="arrow left icon" ></i>
+  </h3>
+</div>
+<div class="centerb ui relaxed divided list">
+  <div class="nameprod1">
+    <div class="carrinho-title"><h2><i class="large shopping cart icon"></i> Carrinho</h2></div>
+
+<div class='ui table'>
+
+ <div *ngIf="get_carrinhoPromo.length === 0 && get_carrinho.length === 0" class="box1" >
+  <br/><br/>
+  <p class="title_carrinho" style="text-align: center;" ><i class="thumbs down icon"></i> Carrinho Vazio</p>
+  <br/>
+  <input class="fluid ui red button" value="Voltar" routerLink="/cardapio">
+ </div>
+
+  <div class="box1" *ngFor="let repo of get_carrinhoPromo;">
+      
+        <p class="title_carrinho"><i class="caret square right icon"></i>{{repo.prodID}}</p>
+        <div class="box1">
+        <p class="title_pizza">{{repo.Pizza1}}</p>
+        <p class="title_sabor">{{repo.qntSabores1}} {{saborOUsabores(repo.qntSabores1)}}</p>
+        <p class="title_sabor"><i class="hand point right icon"></i>{{repo.Sabor1}}</p>
+        <p class="title_sabor">{{repo.bordaID1}}</p>
+        <div *ngIf="repo.Pizza2.length > 1">
+        <hr class="line"/>
+        <p class="title_pizza" *ngIf="repo.Pizza2 > ''">{{repo.Pizza2}}</p>
+        <p class="title_sabor" *ngIf="repo.Pizza2 > ''">{{repo.qntSabores2}} {{saborOUsabores(repo.qntSabores2)}}</p>
+        <p class="title_sabor" *ngIf="repo.Pizza2 > ''"><i class="hand point right icon"></i>{{repo.Sabor2}}</p>
+        <p class="title_sabor" *ngIf="repo.Pizza2 > ''">{{repo.bordaID2}}</p>
+        <hr class="line"/>
+        </div>
+        <div>
+        <div class="title_pizza" *ngIf="repo.BebidaID"><p>Bebida:</p>
+        <p class="title_bebida">{{repo.BebidaID}}</p>
+        <hr class="line"/>
+        </div>
+        <p class="title_valor">{{repo.Valor | currency : 'BRL'}}</p>
+
+ 
+            <div class="ui two top attached buttons">
+              <div class="ui red button" (click)="removerCarrinhoPromo(repo.id);"><i class="minus icon"></i></div>
+              <div class="ui green button" (click)="copiaCarrinhoPromo(repo.id);"><i class="plus icon"></i></div>
+          </div>
+
+
+       </div>
+      </div>
+  </div>
+
+  <div class="box1" *ngFor="let repo of get_carrinho;">
+    <p class="title_titleid"><strong>{{repo.prodID}}</strong></p>
+    <p class="title_valor2">{{repo.Valor | currency : 'BRL'}}</p>
+
+
+        <div class="ui two top attached buttons">
+          <div class="ui red button" (click)="removerCarrinho(repo.id);"><i class="minus icon"></i></div>
+          <div class="ui green button" (click)="copiaCarrinho(repo.id);"><i class="plus icon"></i></div>
+      </div>
+
+
+  </div>
+</div>
+
+  <div class='ui table' *ngIf="get_carrinhoPromo.length > 0 || get_carrinho.length > 0">
+    <div class="box1">
+    <p style="text-align: right;"><label style="margin-right:10px;">Sub-total:</label> {{subtotal1() | currency : 'BRL'}}</p>
+
+    <div class="ui two top attached buttons">
+      <div class="ui grey button" routerLink="/cardapio">Comprar mais</div>
+      <div class="ui green button" routerLink="/finalizar">Finalizar</div>
+  </div>
+    </div>
+  </div>
+
+
+</div>
+</div>
